@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+    {% block tittle %} Productos {% endblock %}
+
+
+    {% block content %}
+        <div>
+                <h1 class="text-center">Agregar Productos</h1> <br><br>
+                <div class="container bg-light">
+                    <div class="container">
+                        {% if ac %}
+                            <div class="alert alert-success" role="alert">
+                                {{ac}}
+                            </div>
+                        {% endif %}
+                        {% if ac2 %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ac2}}
+                            </div>
+                        {% endif %}
+                        <form class="row g-3" action="productosAdd" method="POST" enctype="multipart/form-data">
+                            {% csrf_token  %}
+                            <div class="col-12">
+                                <label class="form-label">SKU</label>
+                                <input class="form-control" type="number" name="sku" placeholder="dejar en blanco para completar automaticamente"> <br>
+                            </div>
+                            <div>
+                                <label class="form-label">Foto</label>
+                                <input class="form-control" type="file" name="fotop">
+                            </div>
+                            <div>
+                                <label class="form-label">Nombre</label>
+                                <input class="form-control" type="text" name="nombrep">  <br>
+                            </div>
+                            <div>
+                                <label class="form-label">Marca</label>
+                                <input class="form-control" type="text" name="marcap">  <br>
+                            </div>
+                            <div>
+                                <label class="form-label">Cantidad</label>
+                                <input class="form-control" type="number" name="cantidadp" value="0">  <br>
+                            </div>
+                            <div>
+                                <label class="form-label">Precio</label>
+                                <input class="form-control" type="number" name="preciop" value="0">  <br>
+                            </div>
+                            <div>
+                                <label class="form-label">Descripcion</label>
+                                <input class="form-control"  type="textarea" name="descripcionp" value="">  <br>
+                            </div>
+                            <div>
+                                <label class="form-label">Detalles</label>
+                                <input class="form-control" type="textarea" name="detallesp" value="">  <br>
+                            </div>
+                            <input type="submit" name="opcion" value="Añadir Producto" width="20" height="50">
+                            <input type="submit" name="opcion" value="Editar">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    {%endblock%}

@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+
+    {% block tittle %} Editar Productos {% endblock %}
+
+
+    {% block content %}
+
+    <div>
+        <h1 class="text-center">Editar Productos</h1> <br><br>
+        <div class="container bg-light">
+            <div class="container">
+                <form class="row g-3" action="{%url 'productosAdd' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token  %}
+                    <div>
+                        <label class="form-label">SKU</label>
+                        <input class="form-control" type="text" name="sku" value="{{producto.sku}}" readonly> <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Imagen</label>
+                        <input class="form-control" type="file" name="fotop" value="{{producto.foto}}">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Nombre</label>
+                        <input class="form-control" type="text" name="nombrep" value="{{producto.nombre}}">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Marca</label>
+                        <input class="form-control" type="text" name="marcap" value="{{producto.marca}}">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Cantidad</label>
+                        <input class="form-control" type="number" name="cantidadp" value="{{producto.cantidad}}">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Precio</label>
+                        <input class="form-control" type="number" name="preciop" value="{{producto.precio}}">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Descripcion</label>
+                        <input class="form-control" type="textarea" name="descripcionp" value="{{producto.descripcion}}">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Detalles</label>
+                        <input class="form-control" type="textarea" name="detallesp" value="{{producto.detalles}}">  <br>
+                    </div>
+                    <input class="#" type="submit" name="opcion" value="Actualizar">
+                    <input type="submit" name="opcion" value="Editar">
+                </form>
+            </div>
+        </div>
+    </div>     
+
+    {%endblock%}

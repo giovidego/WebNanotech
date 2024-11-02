@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+    {% block tittle %} Editar Productos Mode {% endblock %}
+
+
+    {% block content %}
+
+    <div>
+        <h1 class="text-center">Editar Usuario</h1> <br><br>
+        <div class="container bg-light">
+            <div class="container">
+                <form class="row g-3" action="{%url 'usuarioAdd' %}" method="POST" >
+                    {% csrf_token  %}
+                    <div>
+                        <label class="form-label">Usuario</label>
+                        <input class="form-control" type="text" name="usuario" value="{{usuario.username}}" readonly> <br>
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Nueva contraseña</label>
+                        <input class="form-control" type="text" name="contra" value="">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Nuevo email</label>
+                        <input class="form-control" type="email" name="email" value="{{usuario.email}}">  <br>
+                    </div>
+                                        
+                    <input class="#" type="submit" name="opcion" value="Actualizar">
+                    <input type="submit" name="opcion" value="Editar">
+                </form>
+            </div>
+        </div>
+    </div>     
+
+    {%endblock%}

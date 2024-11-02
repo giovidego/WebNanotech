@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+
+    {% block tittle %} Bienvenidos {% endblock %}
+
+
+    {% block content %}
+
+        <div class="p-3">
+            {% if user.is_superuser %}
+            Hola {{user.username}}
+            <h3>Novedades</h3>
+
+                {% include "listadeproductos.html" %}
+
+                <br>
+            
+            {% elif user.is_authenticated %}
+            Hola {{user.username}}
+            <h3>Novedades</h3>
+
+                {% include "listadeproductos.html" %}
+
+                <br>
+            {% else %}
+            ¡Identificate!
+
+            <h3>Novedades</h3>
+
+                {% include "listadeproductos.html" %}
+
+                <br>
+            {%endif%}
+        </div>
+    </div> 
+    {%endblock%}

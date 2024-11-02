@@ -1,0 +1,66 @@
+
+{% extends "base.html" %}
+
+    {% block tittle %} Lista de Productos {% endblock %}
+
+
+    {% block content %}
+
+        <div>
+            
+            <h1 class="text-center">Listado de Productos</h1> <br>
+            {% if ac %}
+                <div class="alert alert-success" role="alert">
+                    {{ac}}
+                </div>
+            {% endif %}
+
+            
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <th>SKU</th>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Descripcion</th>
+                    <th>Detalles</th>
+                    <th>Visible</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                </tr>
+                {% csrf_token %}
+                    {% if productos %}
+                    
+                    
+                    {% for producto in productos %}
+                
+                <tr>
+                    <td>{{producto.sku}} </td>
+                    <td><img src="media/{{producto.foto }}" alt="{{ producto.nombre }}" width="100" height="100"> </td> 
+                    <td>{{producto.nombre}} </td>
+                    <td>{{producto.marca}} </td>
+                    <td>{{producto.cantidad}} </td>
+                    <td>{{producto.precio}} </td>
+                    <td>{{producto.descripcion}} </td>
+                    <td>{{producto.detalles}} </td>
+                    <td>{{producto.visible}} <br> <a href="#"></a> </td>
+                    <td><a href=" {%url 'productosDel' pk=producto.sku %}">eliminar</a></td>
+                    <td><a href=" {%url 'productosEdit' pk=producto.sku %}">modificar</a></td>
+                </tr>
+                    {% endfor%}
+
+                    {% else %}
+                    No hay productos agrega uno desde Agregar Producto
+                    {%endif%}
+                
+            </table>            
+            <div>
+            
+                <a href="{%url 'productosAdd'%}">Volver a Agregar Producto</a>
+
+            </div>
+        </div>
+
+    {%endblock%}

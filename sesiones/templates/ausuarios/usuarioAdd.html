@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+    {% block tittle %} Agregar Usuarios {% endblock %}
+
+
+    {% block content %}
+
+    <div>
+        <h1 class="text-center">Agregar Usuarios</h1> <br><br>
+        <div class="container bg-light">
+            <div class="container">
+                {% if ac %}
+                    <div class="alert alert-success" role="alert">
+                        {{ac}}
+                    </div>
+                {% endif %}
+                {% if ac2 %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ac2}}
+                    </div>
+                {% endif %}
+                <form class="row g-3" action="usuarioAdd" method="POST">
+                    {% csrf_token  %}
+                    <div>
+                        <label class="form-label">Usuario</label>
+                        <input class="form-control" type="text" name="usuario">
+                    </div>
+                    <div>
+                        <label class="form-label">Contraseña</label>
+                        <input class="form-control" type="password" name="contra">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Repetir Contraseña</label>
+                        <input class="form-control" type="password" name="recontra">  <br>
+                    </div>
+                    <div>
+                        <label class="form-label">Email</label>
+                        <input class="form-control" type="text" name="email">  <br>
+                    </div>
+                    <br>
+                    
+                    <input type="submit" name="opcion" value="Añadir Usuario" width="20" height="50">
+                    <input type="submit" name="opcion" value="Editar Usuario">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {%endblock%}
+

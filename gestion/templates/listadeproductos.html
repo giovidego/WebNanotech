@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <div class="container">
+            <h1>Lista de Productos</h1>
+            <div class="row">
+                {% if not productos %}            
+                No hay productos agrega uno desde el administador
+                {% else %}
+                {% for producto in productos %}
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <img src="media/{{producto.foto}}" alt="{{ producto.nombre }}" width="100" height="100">
+                                <h5 class="card-title">{{ producto.nombre }}</h5>
+                                <p class="card-text">{{ producto.descripcion }}</p>
+                                <p class="card-text">Precio: ${{ producto.precio }}</p>
+                                <a href="{%url 'detalles' pk=producto.sku %}" class="btn btn-primary">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}                
+                {%endif%}      
+            </div>
+        </div>
+    </body>
+</html>
