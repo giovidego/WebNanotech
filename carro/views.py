@@ -8,7 +8,7 @@ def carrito(request):
     context={"carro":carrito}
     return render(request, "carro.html",context)
 
-@login_required
+@login_required(login_url='login')
 def agregar_producto(request, pk):
     # if request.method == 'POST':
     #     carro = Carro(request)
@@ -35,7 +35,7 @@ def agregar_producto(request, pk):
     
         return redirect("index")
 
-@login_required
+@login_required(login_url='login')
 def eliminar_producto(request,pk):
     carro= Carro(request)
     producto= Producto.objects.get(sku=pk)
@@ -44,7 +44,7 @@ def eliminar_producto(request,pk):
     
     return redirect("carro")
 
-@login_required
+@login_required(login_url='login')
 def sumar_producto(request,pk):
     carro= Carro(request)
     producto= Producto.objects.get(sku=pk)
@@ -53,7 +53,7 @@ def sumar_producto(request,pk):
     
     return redirect("carro")
 
-@login_required
+@login_required(login_url='login')
 def restar_producto(request,pk):
     carro= Carro(request)
     producto= Producto.objects.get(sku=pk)
@@ -62,7 +62,7 @@ def restar_producto(request,pk):
     
     return redirect("carro")
 
-
+@login_required(login_url='login')
 def limpiar_carroproducto(request):
     carro= Carro(request)
     carro.limpiar_carro()

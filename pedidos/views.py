@@ -9,7 +9,7 @@ from pedidos.models import LineaPedido, Pedido
 def is_admin(user):
     return user.is_superuser
 
-@login_required
+@login_required(login_url='login')
 @user_passes_test(is_admin)
 def mandar_pedido(request):
 

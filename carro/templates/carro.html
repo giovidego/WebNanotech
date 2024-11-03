@@ -33,10 +33,10 @@
                 <td>{{value.precio}} </td>
                 <td>{{value.subtotal}}</td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'sumar' pk=value.sku %}">+</a>
-                    <a class="btn btn-primary" href="{% url 'restar' pk=value.sku %}">-</a>
+                    <a class="btn btn-primary" href="{% url 'carro:sumar' pk=value.sku %}">+</a>
+                    <a class="btn btn-primary" href="{% url 'carro:restar' pk=value.sku %}">-</a>
                 </td>
-                <td><a href="{% url 'eliminar' pk=value.sku %}">Quitar articulos</a></td>
+                <td><a href="{% url 'carro:eliminar' pk=value.sku %}">Quitar articulos</a></td>
                 
             </tr>
             {% endfor %}
@@ -55,10 +55,12 @@
         </table>            
         <div>
             {% if user.is_superuser %}
-            <a class="btn btn-primary" href="{% url 'pedidos:mandar'%}">Pagar</a>
-            {% endif %}
+            <a class="btn btn-primary" href="{% url 'mandar'%}">Pagar</a>
             <br>
             <a href="{% url 'index'%}">Volver tienda</a>
+            {% else %}
+            <a href="{% url 'index'%}">Volver tienda</a>
+            {% endif %}
             
 
         </div>

@@ -8,7 +8,7 @@ def is_admin(user):
     return user.is_superuser
 
 
-@login_required
+@login_required(login_url='login')
 @user_passes_test(is_admin)
 def productosAdd(request):
     context ={}
@@ -105,7 +105,7 @@ def productosAdd(request):
         
     return render(request, 'productosAdd.html', context)
 
-@login_required
+@login_required(login_url='login')
 @user_passes_test(is_admin)
 def productosEdit(request,pk):
     print("Hola estoy en productosEdit", pk)
@@ -117,7 +117,7 @@ def productosEdit(request,pk):
     print("salió del for")
     return render(request,'productosEdit.html',context)
 
-@login_required
+@login_required(login_url='login')
 @user_passes_test(is_admin)
 def productosDel(request, pk):
     print("Hola estoy en productosDel")
@@ -138,7 +138,7 @@ def productosDel(request, pk):
         context = {'ac':'No se pudo eliminar producto ('+str(nom)+')', "productos": productos}
         return render(request,'productosList.html', context)
 
-@login_required
+@login_required(login_url='login')
 @user_passes_test(is_admin)
 def ver_pedidos(request):   
     pedidos = Pedido.objects.all()
