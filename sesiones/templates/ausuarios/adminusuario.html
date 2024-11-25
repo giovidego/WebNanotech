@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
     {% block tittle %} Lista de Usuarios {% endblock %}
@@ -45,3 +46,52 @@
         </div>
 
     {%endblock%}
+=======
+{% extends "base.html" %}
+
+    {% block tittle %} Lista de Usuarios {% endblock %}
+
+
+    {% block content %}
+
+        <div>
+            
+            <h1 class="text-center">Listado de Usuarios</h1> <br>
+            {% if ac %}
+                <div class="alert alert-success" role="alert">
+                    {{ac}}
+                </div>
+            {% endif %}
+                
+            
+            <table class="table table-hover table-bordered">
+                <tr>
+                    
+                    <th>Usuario</th>
+                    <th>Email</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                </tr>
+                {% csrf_token %}
+                
+                {% for usuario in users %}
+                
+                <tr>
+                    <td>{{usuario.username}} </td> 
+                    <td>{{usuario.email}}</td>                                        
+                    <td><a href="{%url 'usuarioDel' pk=usuario.username %}">eliminar</a></td>
+                    <td><a href="{%url 'usuarioEdit' pk=usuario.username %}">modificar</a></td>
+                </tr>
+                {% endfor%}
+            
+                
+            </table>            
+            <div>
+            
+                <a href="{%url 'usuarioAdd'%}">Agregar usuario</a>
+
+            </div>
+        </div>
+
+    {%endblock%}
+>>>>>>> 77b3203bc8f619758b59b020ded599290df4236a
