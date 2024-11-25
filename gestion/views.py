@@ -1,11 +1,96 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
-from gestion.models import Producto
+from gestion.models import Producto, Postit
 from pedidos.models import LineaPedido, Pedido
 
 
 def is_admin(user):
     return user.is_superuser
+
+@login_required(login_url='login')
+@user_passes_test(is_admin)
+def ver_libreta(request):
+    posit = Postit.objects.all()
+    context = {'postit' :posit}
+
+    if request.method == "POST":
+        opcion = request.POST["opcion"]
+        if opcion == "Añadir Postit":
+            print("Opcion: "+opcion)
+            try:
+                last_id = Postit.objects.all().order_by('id').last()
+                id = last_id.id + 1 if last_id else 1
+                nombre = request.POST["titulop"]
+                detalles = request.POST["detallesp"]
+            
+                print(id, nombre, detalles)
+
+                hoja = Postit.objects.create( titulo=nombre, detalles=detalles)
+                
+                hoja.save()
+                
+                context={'ac':'La hoja ha sido agregada correctamente', 'postit' :posit}
+                return render(request, 'libreta.html', context)
+                            
+            except:
+                context={'ac2':'La hoja no se pudo agregar', 'postit' :posit}
+                return render(request, 'libreta.html', context)
+        
+        if opcion == "Actualizar":
+            print("Entró a actualizar")
+            print("Opción="+opcion)
+            
+            id = request.POST["id"] 
+            titulo = request.POST["nombrep"]
+            detalles = request.POST["detallesp"]
+
+            hoja = Postit.objects.get(id=id)
+            
+            hoja.id=id
+            hoja.titulo=titulo
+            hoja.detalles=detalles
+            hoja.save()
+
+        
+            posit = Postit.objects.all().values()
+            context={'postit' :posit,"ac":"Bien, datos actualizados"}
+
+            return render(request, 'libreta.html', context)
+
+    else:
+        return render(request, 'libreta.html', context)
+    
+@login_required(login_url='login')
+@user_passes_test(is_admin)
+def hojaEdit(request,pk):
+    print("Hola estoy en productosEdit", pk)
+    posit = Postit.objects.get(id=pk) 
+    context={'postit' :posit}
+    
+    
+    return render(request,'hojaEdit.html',context)
+    
+@login_required(login_url='login')
+@user_passes_test(is_admin)
+def hojaDel(request, pk):
+    print("Hola estoy en hojaDel")
+    if request.method == 'GET':
+        try:
+            hoja = Postit.objects.get(id=pk)  
+            nom = hoja.titulo          
+            hoja.delete()
+            
+
+            posit = Postit.objects.all().values()
+            context = {'postit' :posit}
+            return redirect('ver_libreta')
+        except:
+            posit = Postit.objects.all().values() 
+            context = {'ac':'No se pudo eliminar producto ('+str(nom)+')', 'postit' :posit}
+            return render(request, 'libreta.html', context)
+    return HttpResponseForbidden("Método no permitido")
+
 
 
 @login_required(login_url='login')
@@ -121,22 +206,24 @@ def productosEdit(request,pk):
 @user_passes_test(is_admin)
 def productosDel(request, pk):
     print("Hola estoy en productosDel")
-    try:
-        producto = Producto.objects.get(sku=pk)
-        nom= producto.nombre
-        ruta_foto="media/"+str(producto.foto)
-        producto.delete()
-        if ruta_foto != "media/productos/fotodefault.png":
-            import os
-            os.remove(ruta_foto)
+    if request.method == 'GET':
+        try:
+            producto = Producto.objects.get(sku=pk)
+            nom= producto.nombre
+            ruta_foto="media/"+str(producto.foto)
+            producto.delete()
+            if ruta_foto != "media/productos/fotodefault.png":
+                import os
+                os.remove(ruta_foto)
 
-        productos = Producto.objects.all().values()
-        context = {'ac':'Producto ('+str(nom)+') eliminado correctamente',"productos": productos}
-        return redirect('productosList')
-    except:
-        productos = Producto.objects.all()  
-        context = {'ac':'No se pudo eliminar producto ('+str(nom)+')', "productos": productos}
-        return render(request,'productosList.html', context)
+            productos = Producto.objects.all().values()
+            context = {'ac':'Producto ('+str(nom)+') eliminado correctamente',"productos": productos}
+            return redirect('productosList')
+        except:
+            productos = Producto.objects.all()  
+            context = {'ac':'No se pudo eliminar producto ('+str(nom)+')', "productos": productos}
+            return render(request,'productosList.html', context)
+    return HttpResponseForbidden("Método no permitido")
 
 @login_required(login_url='login')
 @user_passes_test(is_admin)
@@ -147,6 +234,18 @@ def ver_pedidos(request):
     return render(request, 'verpedidos.html', context)
 
 
+# def add_libreta(request):
+#     print(request.method)
+#     if request.method == "POST":
+#         opcion = request.POST["opcion"]
+#         print(opcion)
+        
+#         if opcion == "agregar":
+#             print("Opcion: "+opcion)
+#             redirect('ver_libreta')
+
+#     context = {}
+#     return render(request, 'libreta.html', context)
 
 def Bienvenida(request):
     productos = Producto.objects.all().values()

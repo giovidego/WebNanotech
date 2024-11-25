@@ -9,12 +9,23 @@ class Producto(models.Model):
     marca = models.CharField(max_length=30)
     cantidad = models.IntegerField()
     precio = models.IntegerField()
-    descripcion = models.CharField(blank=True, null=True, max_length=30)
+    descripcion = models.CharField(blank=True, null=True, max_length=500)
     detalles = models.CharField(blank=True, null=True, max_length=1000)
     visible = models.BooleanField(default=True)
     
     def __str__(self) -> str:
         return "%s, %s %s, stock: %s"% (self.sku ,self.nombre, self.marca, self.cantidad)
+
+
+class Postit(models.Model):
+    id = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=50)
+    detalles = models.CharField(blank=True, null=True, max_length=3000)
+
+    def __str__(self) -> str:
+        return "%s, %s, %s" (self.id, self.titulo, self.detalles)
+
+
 
 #python manage.py makemigrations
 #python manage.py sqlmigrate ropa numeromigracion
