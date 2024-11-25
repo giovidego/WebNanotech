@@ -146,20 +146,23 @@ def usuarioEdit(request,pk):
 @login_required
 @user_passes_test(is_admin)
 def usuarioDel(request, pk):
-    
-    try:
-        eusuario = User.objects.get(username=pk)
-        nom= eusuario.username
-        
-        eusuario.delete()
-        
+    print(request)
+    if request.method == "GET":
+        try:
+            eusuario = User.objects.get(username=pk)
+            nom= eusuario.username
+            
+            eusuario.delete()
+            
 
-        users = User.objects.all()  
-        context={'users': users,'ac':'Usuario ('+str(nom)+') eliminado correctamente'}
-        
-        return render(request, 'ausuarios/adminusuario.html', context)
-    except:
-        users = User.objects.all()  
-        context = {'ac2':'No se pudo eliminar usuario ('+str(nom)+')', "users": users}
+            users = User.objects.all()  
+            context={'users': users,'ac':'Usuario ('+str(nom)+') eliminado correctamente'}
+            
+            return redirect('usuarios')
+        except:
+            users = User.objects.all()  
+            context = {'ac2':'No se pudo eliminar usuario ('+str(nom)+')', "users": users}
+            return render(request, 'ausuarios/adminusuario.html', context)
+    else:
         return render(request, 'ausuarios/adminusuario.html', context)
     

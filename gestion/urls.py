@@ -25,8 +25,11 @@ urlpatterns = [
     path('productosEdit/<int:pk>',views.productosEdit, name='productosEdit'),
     path('productosDel/<int:pk>',views.productosDel, name='productosDel'),
     path('detalles/<int:pk>',views.detalles, name='detalles'),
-    # path('carro',views.carro, name='carro'),
     path('ver_pedidos/', views.ver_pedidos, name="ver_pedidos"),
+    path('libreta/', views.ver_libreta, name="ver_libreta"),
+    path('hojaDel/<int:pk>',views.hojaDel, name='hojaDel'),
+    path('hojaEdit/<int:pk>',views.hojaEdit, name='hojaEdit'),
+    # path('libretaadd', views.addlibreta, name="libretaadd"),
     path('', views.Bienvenida, name='index'),
     
 ]
