@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends "base.html" %}
 
     {% block tittle %} Libreta {% endblock %}
@@ -62,69 +61,4 @@
 
         </div>
     </div>
-=======
-{% extends "base.html" %}
-
-    {% block tittle %} Libreta {% endblock %}
-
-    {% block content %}
-
-    <div>
-        <div>
-            <h1 class="text-center">Libreta</h1> <br>
-            {% if ac %}
-                <div class="alert alert-success" role="alert">
-                    {{ac}}
-                </div>
-            {% endif %}
-            {% if ac2 %}
-                <div class="alert alert-danger" role="alert">
-                    {{ac2}}
-                </div>
-            {% endif %}
-        </div>
-        <div>
-            <form class="row g-3" method="POST" enctype="multipart/form-data">
-                {% csrf_token  %}
-                        
-                <div>
-                    <label class="form-label">Titulo</label>
-                    <input class="form-control" type="text" name="titulop" value="">  <br>
-                </div>           
-                <div>
-                    <label class="form-label">Texto</label>
-                    <input class="form-control" type="text" name="detallesp" value="" > 
-                    <br>
-                </div>
-                
-                <input type="submit" name="opcion" value="Añadir Postit" style="width: 10%;">
-            </form>
-        <br>
-        </div>  
-    </div>
-        
-    <div>
-        {% for posit in postit %}
-        <div class="container">
-            <div class="border border-success p-2 mb-2">  
-                              
-                <a href="{%url 'hojaEdit'  pk=posit.id%}">modificar</a>
-                <p>Titulo: {{posit.titulo}}</p>
-                
-                <p>Texto: <br> {{ posit.detalles }}</p>
-                
-                <a href=" {%url 'hojaDel' pk=posit.id %}">eliminar</a>
-
-            </div>
-            
-        </div>
-        {% endfor %}
-        <div>
-            
-            <a href="{% url 'index'%}">Volver tienda</a>
-            
-
-        </div>
-    </div>
->>>>>>> 77b3203bc8f619758b59b020ded599290df4236a
     {%endblock%}

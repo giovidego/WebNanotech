@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends "base.html" %}
 
     {% block tittle %} Editar Productos {% endblock %}
@@ -33,40 +32,4 @@
         </div>
     </div>     
 
-=======
-{% extends "base.html" %}
-
-    {% block tittle %} Editar Productos {% endblock %}
-
-
-    {% block content %}
-
-    <div>
-        <h1 class="text-center">Editar Productos</h1> <br><br>
-        <div class="container bg-light">
-            <div class="container">
-                <form class="row g-3" action="{%url 'ver_libreta' %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token  %}
-                    <div>
-                        <label class="form-label">ID</label>
-                        <input class="form-control" type="text" name="id" value="{{postit.id}}" readonly> <br>
-                    </div>
-                    
-                    <div>
-                        <label class="form-label">Titulo</label>
-                        <input class="form-control" type="text" name="nombrep" value="{{postit.titulo}}">  <br>
-                    </div>
-                    
-                    <div>
-                        <label class="form-label">Texto</label>
-                        <input class="form-control" type="textarea" name="detallesp" value="{{postit.detalles}}">  <br>
-                    </div>
-                    <input type="submit" name="opcion" value="Actualizar">
-                    <a href="{%url 'ver_libreta' %}"> Volver </a>
-                </form>
-            </div>
-        </div>
-    </div>     
-
->>>>>>> 77b3203bc8f619758b59b020ded599290df4236a
     {%endblock%}

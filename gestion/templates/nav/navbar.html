@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <html>
 
     <!-- barra de navegacion -->
@@ -30,6 +29,7 @@
                   <li><a class="dropdown-item" href="{%url 'productosAdd'%}">Administrar Productos</a></li>
                   <li><a class="dropdown-item" href="{%url 'usuarios'%}">Administrar Usuarios</a></li>   
                   <li><a class="dropdown-item" href="{%url 'ver_pedidos'%}">Pedidos</a></li>
+                  <li><a class="dropdown-item" href="{%url 'analitica'%}">Rendimientos</a></li>
                   <li><a class="dropdown-item" href="{%url 'ver_libreta'%}">Libreta</a></li>
                                  
                 </ul>
@@ -91,98 +91,4 @@
 
 
 
-=======
-<html>
-
-    <!-- barra de navegacion -->
-<body>
-    
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">NanoTech</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              
-              
-              {% if user.is_superuser %}
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{%url 'index'%}">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{%url 'carro'%}">Cesta de compra</a>
-              </li>
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Administracion
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{%url 'productosAdd'%}">Administrar Productos</a></li>
-                  <li><a class="dropdown-item" href="{%url 'usuarios'%}">Administrar Usuarios</a></li>   
-                  <li><a class="dropdown-item" href="{%url 'ver_pedidos'%}">Pedidos</a></li>
-                  <li><a class="dropdown-item" href="{%url 'ver_libreta'%}">Libreta</a></li>
-                                 
-                </ul>
-              </li>                            
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Identificado como {{user.username}}              
-                </a>
-                <ul class="dropdown-menu">
-                  
-                  
-                  <li><a class="dropdown-item" href="{%url 'cerrar_sesion'%}">Cerrar sesion</a></li>
-                </ul>
-                {% elif user.is_authenticated %}  
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{%url 'index'%}">Inicio</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{%url 'carro'%}">Cesta de compra</a>
-                </li>
-                
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Identificado como {{user.username}}              
-                  </a>
-                  <ul class="dropdown-menu">
-                    
-                    
-                    <li><a class="dropdown-item" href="{%url 'cerrar_sesion'%}">Cerrar sesion</a></li>
-                  </ul>
-                
-
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{%url 'index'%}">Inicio</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{%url 'carro'%}">Cesta de compra</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Identificate!                  
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{%url 'login'%}">Iniciar sesión</a></li>
-                    <li><a class="dropdown-item" href="{%url 'registro'%}">Registrarse</a></li>
-                  </ul>
-                                      
-                {%endif%}
-              </li>
-              <li>
-                <p class="position-absolute bottom-0 end-0 me-5" ><span id="city-name"></span> <span id="temperature"></span></p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-</body>
-
-
-
->>>>>>> 77b3203bc8f619758b59b020ded599290df4236a
 </html>
